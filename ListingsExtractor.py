@@ -10,7 +10,6 @@ index = 1
 results = []
 
 def extract_value(soup, locator, index):
-    value = ""
     try:
         return soup.xpath(locator)[index].text_content()
     except Exception:
