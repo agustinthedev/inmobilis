@@ -5,7 +5,7 @@ load_dotenv()
 
 class Util():
     def __init__(self):
-        pass
+        self.config = self.get_config()
 
     def get_config(self):
         return json.load(open("config.json"))
