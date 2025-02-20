@@ -1,3 +1,4 @@
 .env
 __pycache__
 inmobilis.db
+Extractors/Utils/inmobilis.db-journal
