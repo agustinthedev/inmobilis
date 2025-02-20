@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class Environment():
+class Util():
     def __init__(self):
         pass
 
