@@ -12,6 +12,9 @@ class Util():
     
     def get_db_name(self):
         return self.config["database"]["name"]
+    
+    def get_insert_listing_query(self):
+        return self.config["database"]["insert_listing_query"]
 
     def get_deepseek_api_key(self):
         return os.getenv("deepseek-API")
