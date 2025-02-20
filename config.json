@@ -1,0 +1,5 @@
+{
+    "endpoints": {
+        "deepseek-api": "https://api.deepseek.com"
+    }
+}
