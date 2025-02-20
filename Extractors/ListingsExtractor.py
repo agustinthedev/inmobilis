@@ -41,10 +41,10 @@ while True:
 
             title = soup.xpath(title_selector)[i].text_content()
             link = soup.xpath(link_selector)[i].get('href')
-            price = soup.xpath(price_selector)[i].text_content()
+            price = int(str(soup.xpath(price_selector)[i].text_content()).replace(".", ""))
             location = soup.xpath(location_selector)[i].text_content()
             details =  extract_value(soup, details_delector, i) #TODO: Create alert for these cases
-            print(f"Title: {title} // Price: {price} // Details: {details} // Location: {location} // Link: {link} \n\n")
+            print(f"Title: {title} // Price: {str(price)} // Details: {details} // Location: {location} // Link: {link} \n\n")
 
             result = {
                 "title": title,
