@@ -1,5 +1,9 @@
 {
     "endpoints": {
         "deepseek-api": "https://api.deepseek.com"
+    },
+    "database": {
+        "name": "inmobilis.db",
+        "insert_listing_query": "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (%Title%, %Link%, %Raw_Link%, %Price%, %Address%, %Raw_Details%, 0, 0, 0, %Property_Type%, %Neighborhood%, %Operation_Type%, 0)"
     }
 }
