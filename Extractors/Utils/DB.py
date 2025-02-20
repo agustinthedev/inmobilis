@@ -7,4 +7,5 @@ class DB:
 
     def __start_connection(self):
         connection = sqlite3.connect(Util().get_db_name())
-        return connection.cursor()
+        self.connection = connection
+        return self.connection.cursor()
