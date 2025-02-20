@@ -6,7 +6,7 @@ from Utils.DB import DB
 # TODO: Define list of all neighborhoods and get slugs
 # TODO: Create process to get all URLs needed for scrape by mixing types of properties and neighborhoods
 
-url = 'https://listado.mercadolibre.com.uy/inmuebles/apartamentos/venta/montevideo/aguada/_Desde_%index%_NoIndex_True'
+url = 'https://listado.mercadolibre.com.uy/inmuebles/apartamentos/alquiler/montevideo/aguada/_Desde_%index%_NoIndex_True'
 index = 1
 results = []
 database = DB()
@@ -57,7 +57,7 @@ while True:
                 "raw_details": details,
                 "property_type": "Casa", # TODO: remove hardcode
                 "neighborhood": "Aguada", # TODO: remove hardcode
-                "operation_type": "Venta" # TODO: remove hardcode
+                "operation_type": "Alquiler" # TODO: remove hardcode
             }
 
             database.insert_listing(result)
