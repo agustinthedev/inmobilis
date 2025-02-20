@@ -1,5 +1,6 @@
 import requests
 from lxml.html import fromstring
+from Utils.DB import DB
 
 # TODO: Define list of all types of properties wanted for scrape (apartamentos, casa, cochera, etc) and get URLs
 # TODO: Define list of all neighborhoods and get slugs
@@ -8,6 +9,7 @@ from lxml.html import fromstring
 url = 'https://listado.mercadolibre.com.uy/inmuebles/apartamentos/venta/montevideo/aguada/_Desde_%index%_NoIndex_True'
 index = 1
 results = []
+database = DB()
 
 def extract_value(soup, locator, index):
     try:
@@ -41,7 +43,7 @@ while True:
 
             title = soup.xpath(title_selector)[i].text_content()
             link = soup.xpath(link_selector)[i].get('href')
-            price = int(str(soup.xpath(price_selector)[i].text_content()).replace(".", ""))
+            price = str(soup.xpath(price_selector)[i].text_content()).replace(".", "")
             location = soup.xpath(location_selector)[i].text_content()
             details =  extract_value(soup, details_delector, i) #TODO: Create alert for these cases
             print(f"Title: {title} // Price: {str(price)} // Details: {details} // Location: {location} // Link: {link} \n\n")
@@ -57,6 +59,8 @@ while True:
                 "neighborhood": "Aguada", # TODO: remove hardcode
                 "operation_type": "Venta" # TODO: remove hardcode
             }
+
+            database.insert_listing(result)
 
             results.append(result)
     else:
