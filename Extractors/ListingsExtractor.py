@@ -48,10 +48,14 @@ while True:
 
             result = {
                 "title": title,
-                "link": link,
+                "link": str(link).split("#")[0],
+                "raw_link": link,
                 "price": price,
-                "location": location,
-                "details": details
+                "address": location,
+                "raw_details": details,
+                "property_type": "Casa", # TODO: remove hardcode
+                "neighborhood": "Aguada", # TODO: remove hardcode
+                "operation_type": "Venta" # TODO: remove hardcode
             }
 
             results.append(result)
