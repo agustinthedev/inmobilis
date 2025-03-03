@@ -23,6 +23,11 @@ class DB:
 
         return scrape_id
     
+    def get_urls_to_scrape(self):
+        query = "SELECT Url, Neighborhood FROM scrape_urls WHERE Enabled = '1'"
+        exec = self.connection.cursor().execute(query)
+        return exec.fetchall()
+    
     def listing_with_url_exists(self, url):
         # TODO: Check if listing is in (current_scrape_id - 1) before returning
         query = "SELECT * FROM listings WHERE Link = ?"
