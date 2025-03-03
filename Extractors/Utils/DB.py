@@ -1,4 +1,5 @@
 import sqlite3, os.path
+from datetime import datetime
 #from Util import Util
 
 class DB:
@@ -11,6 +12,16 @@ class DB:
         # connection = sqlite3.connect(Util().get_db_name())
         connection = sqlite3.connect(os.path.join(os.path.dirname(os.path.abspath(__file__)), "inmobilis.db"))
         return connection
+
+    def create_new_scrape_id(self):
+        query = "INSERT INTO scrape_ids(Date) VALUES (?)"
+        insert_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+        exec = self.connection.cursor().execute(query, (insert_date,))
+        self.connection.commit()
+        scrape_id = exec.lastrowid
+
+        return scrape_id
     
     def listing_with_url_exists(self, url):
         # TODO: Check if listing is in (current_scrape_id - 1) before returning
@@ -29,3 +40,6 @@ class DB:
 
         self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], 0, 0, 0, listing['property_type'], listing['neighborhood'], listing['operation_type'], 0))
         self.connection.commit()
+
+db = DB()
+print(f"Scrape ID: {db.create_new_scrape_id()}")
