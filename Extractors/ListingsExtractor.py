@@ -25,7 +25,7 @@ def get_operation_type(url):
 
     for type in operation_types:
         if type in str(url).lower:
-            return str(type).replace("/", "")
+            return str(type).replace("/", "").capitalize
         
 # TODO: Move to Util file
 def get_property_type(url, title):
