@@ -26,6 +26,17 @@ def get_operation_type(url):
     for type in operation_types:
         if type in str(url).lower:
             return str(type).replace("/", "")
+        
+# TODO: Move to Util file
+def get_property_type(url, title):
+    if "residencia" in str(title).lower:
+        return "Residencia"
+
+    if "/apartamentos/" in str(url).lower:
+        return "Apartamento"
+    
+    if "/casas/" in str(url).lower:
+        return "Casa"
 
 def start_scraping(url, neighborhood, scrape_id):
     index = 1
