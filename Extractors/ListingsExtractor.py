@@ -18,6 +18,14 @@ def extract_value(soup, locator, index):
         return soup.xpath(locator)[index].text_content()
     except Exception:
         return "Unknown"
+    
+# TODO: Move to Util file
+def get_operation_type(url):
+    operation_types = ["/venta/", "/alquiler/"]
+
+    for type in operation_types:
+        if type in str(url).lower:
+            return str(type).replace("/", "")
 
 def start_scraping(url, neighborhood, scrape_id):
     index = 1
@@ -73,13 +81,15 @@ def start_scraping(url, neighborhood, scrape_id):
             print("[!] No more listing available. Stopping scrapping.")
             break
 
-print(f"[!] Final count of results: {str(len(results))}.")
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=True)
 
     parser.add_argument("--url")
     parser.add_argument("--neighborhood")
-    parser.add_argument("--scrape-id")
+    parser.add_argument("--scrapeid")
 
     args = parser.parse_args(sys.argv[1:])
+
+    start_scraping(url=args.url, neighborhood=args.neighborhood, scrape_id=args.scrapeid)
+
+    print(f"[!] Final count of results: {str(len(results))}.")
