@@ -2,6 +2,9 @@ import requests
 from lxml.html import fromstring
 from Utils.DB import DB
 
+#https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230284_NoIndex_True - NUEVO
+#https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230581_NoIndex_True - USADO
+
 # TODO: Define list of all types of properties wanted for scrape (apartamentos, casa, cochera, etc) and get URLs
 # TODO: Define list of all neighborhoods and get slugs
 # TODO: Create process to get all URLs needed for scrape by mixing types of properties and neighborhoods
