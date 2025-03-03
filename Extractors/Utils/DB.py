@@ -38,5 +38,5 @@ class DB:
 
         print(query)
 
-        self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], 0, 0, 0, listing['property_type'], listing['neighborhood'], listing['operation_type'], 0))
+        self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], 0, 0, 0, listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
         self.connection.commit()
