@@ -12,6 +12,13 @@ class DB:
         connection = sqlite3.connect(os.path.join(os.path.dirname(os.path.abspath(__file__)), "inmobilis.db"))
         return connection
     
+    def listing_with_url_exists(self, url):
+        query = "SELECT * FROM listings WHERE Link = ?"
+        exec = self.connection.cursor().execute(query, (url,))
+        results = exec.fetchall()
+        return True if results else False
+        
+
     def insert_listing(self, listing:dict):
         # TODO: Read query from config, throwing error when importing Util for some reason
         # query = "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (%Title%, %Link%, %Raw_Link%, %Price%, %Address%, %Raw_Details%, 0, 0, 0, %Property_Type%, %Neighborhood%, %Operation_Type%, 0)"
