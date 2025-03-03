@@ -62,7 +62,8 @@ def start_scraping(url, neighborhood, scrape_id):
                     "raw_details": details,
                     "property_type": "Casa", # TODO: remove hardcode
                     "neighborhood": neighborhood,
-                    "operation_type": "Alquiler" # TODO: remove hardcode
+                    "operation_type": "Alquiler", # TODO: remove hardcode
+                    "scrape_id": str(scrape_id)
                 }
 
                 database.insert_listing(result)
