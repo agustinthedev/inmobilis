@@ -79,9 +79,9 @@ def start_scraping(url, neighborhood, scrape_id):
                     "price": price,
                     "address": location,
                     "raw_details": details,
-                    "property_type": "Casa", # TODO: remove hardcode
+                    "property_type": get_property_type(url, title),
                     "neighborhood": neighborhood,
-                    "operation_type": "Alquiler", # TODO: remove hardcode
+                    "operation_type": get_operation_type(url),
                     "scrape_id": str(scrape_id)
                 }
 
