@@ -1,4 +1,4 @@
-import requests
+import requests, argparse, sys
 from lxml.html import fromstring
 from Utils.DB import DB
 
@@ -71,3 +71,12 @@ while True:
         break
 
 print(f"[!] Final count of results: {str(len(results))}.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(add_help=True)
+
+    parser.add_argument("--url")
+    parser.add_argument("--neighborhood")
+    parser.add_argument("--scrape-id")
+
+    args = parser.parse_args(sys.argv[1:])
