@@ -39,6 +39,8 @@ def get_property_type(url, title):
     
     if "/casas/" in str(url).lower():
         return "Casa"
+    
+    return "Unknown"
 
 def start_scraping(url, neighborhood, scrape_id):
     index = 1
