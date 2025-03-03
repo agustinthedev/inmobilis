@@ -21,7 +21,7 @@ def extract_value(soup, locator, index):
 
 def start_scraping(url, neighborhood, scrape_id):
     index = 1
-    
+
     while True:
         request_url = url.replace("%index%", str(index))
         print(f"[!] Sending request to: {request_url}")
@@ -61,7 +61,7 @@ def start_scraping(url, neighborhood, scrape_id):
                     "address": location,
                     "raw_details": details,
                     "property_type": "Casa", # TODO: remove hardcode
-                    "neighborhood": "Aguada", # TODO: remove hardcode
+                    "neighborhood": neighborhood,
                     "operation_type": "Alquiler" # TODO: remove hardcode
                 }
 
