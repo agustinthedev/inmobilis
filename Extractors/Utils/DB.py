@@ -13,6 +13,7 @@ class DB:
         return connection
     
     def listing_with_url_exists(self, url):
+        # TODO: Check if listing is in (current_scrape_id - 1) before returning
         query = "SELECT * FROM listings WHERE Link = ?"
         exec = self.connection.cursor().execute(query, (url,))
         results = exec.fetchall()
