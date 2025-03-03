@@ -40,6 +40,3 @@ class DB:
 
         self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], 0, 0, 0, listing['property_type'], listing['neighborhood'], listing['operation_type'], 0))
         self.connection.commit()
-
-db = DB()
-print(f"Scrape ID: {db.create_new_scrape_id()}")
