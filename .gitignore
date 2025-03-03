@@ -3,3 +3,4 @@ __pycache__
 inmobilis.db
 Extractors/Utils/inmobilis.db-journal
 Tests.py
+.idea/
