@@ -21,3 +21,6 @@ class Util():
     
     def get_telegram_bot_token(self):
         return os.getenv("telegram_bot_token")
+    
+    def get_telegram_chat_id(self):
+        return os.getenv("telegram_chat_id")
