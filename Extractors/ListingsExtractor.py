@@ -1,6 +1,7 @@
 import requests, argparse, sys
 from lxml.html import fromstring
 from Utils.DB import DB
+from Utils.Util import Util
 
 #https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230284_NoIndex_True - NUEVO
 #https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230581_NoIndex_True - USADO
@@ -12,6 +13,7 @@ from Utils.DB import DB
 #url = 'https://listado.mercadolibre.com.uy/inmuebles/apartamentos/alquiler/montevideo/aguada/_Desde_%index%_NoIndex_True'
 results = []
 database = DB()
+util = Util()
 
 def extract_value(soup, locator, index):
     try:
@@ -76,6 +78,8 @@ def start_scraping(url, neighborhood, scrape_id):
                 details =  extract_value(soup, details_delector, i) #TODO: Create alert for these cases
                 print(f"Title: {title} // Price: {str(price)} // Details: {details} // Location: {location} // Link: {link} \n\n")
 
+                parsed_details = util.format_details(details, title)
+
                 result = {
                     "title": title,
                     "link": str(link).split("#")[0],
@@ -83,9 +87,9 @@ def start_scraping(url, neighborhood, scrape_id):
                     "price": price,
                     "address": location,
                     "raw_details": details,
-                    "bedrooms": "0",
-                    "bathrooms": "0",
-                    "area": "0",
+                    "bedrooms": parsed_details['bedrooms'],
+                    "bathrooms": parsed_details['bathrooms'],
+                    "area": parsed_details['area'],
                     "property_type": get_property_type(url, title),
                     "neighborhood": neighborhood,
                     "operation_type": get_operation_type(url),
