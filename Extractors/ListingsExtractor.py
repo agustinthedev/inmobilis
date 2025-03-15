@@ -116,3 +116,4 @@ if __name__ == "__main__":
     start_scraping(url=args.url, neighborhood=args.neighborhood, scrape_id=args.scrapeid)
 
     print(f"[!] Final count of results: {str(len(results))}.")
+    #TODO: Implement final results amoutn checker to detect big changes in amount of records scraped.
