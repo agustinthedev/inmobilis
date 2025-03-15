@@ -70,3 +70,16 @@ class DB:
 
         self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], listing['bedrooms'], listing['bathrooms'], listing['area'], listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
         self.connection.commit()
+
+    def insert_opportunity_sent(self, url:str):
+        insert_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        query = "INSERT INTO sent_opportunities(Url, Timestamp) VALUES(?, ?)"
+
+        self.connection.cursor().execute(query, (url, insert_date))
+        self.connection.commit()
+
+    def opportunity_sent_exists(self, url:str):
+        query = f"SELECT Id FROM sent_opportunities WHERE Url=?"
+        exec = self.connection.cursor().execute(query, (url,))
+
+        return True if exec.fetchall() else False
