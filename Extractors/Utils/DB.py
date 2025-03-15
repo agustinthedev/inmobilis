@@ -43,8 +43,10 @@ class DB:
         exec = self.connection.cursor().execute(query)
         return exec.fetchall()
     
-    def get_scrape_results_listings(self, scrape_id):
-        query = f"" #TODO: Implement
+    def get_scrape_results_listings(self, scrape_id:str, operation_type:str):
+        query = f"SELECT * FROM listings WHERE Scrape_Id='{scrape_id}' AND Operation_Type='{operation_type}'"
+        exec = self.connection.cursor().execute(query)
+        return exec.fetchall()
 
     def get_median_price(self, scrape_id:str, operation:str, neighborhood:str, bedrooms:str, exclude_types:str):
         query = f'SELECT MAX(Price) AS "Median" FROM (SELECT Price, NTILE(4) OVER(ORDER BY Price) AS Quartile FROM listings WHERE Scrape_Id = "{scrape_id}" AND Operation_Type = "{operation}" AND Bedrooms = "{bedrooms}" AND Neighborhood = "{neighborhood}" AND Property_Type NOT IN ("{exclude_types}")) X WHERE Quartile = 2'
