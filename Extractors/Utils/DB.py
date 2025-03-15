@@ -9,7 +9,6 @@ class DB:
 
     def __start_connection(self):
         # TODO: Read db name from config
-        # connection = sqlite3.connect(Util().get_db_name())
         connection = sqlite3.connect(os.path.join(os.path.dirname(os.path.abspath(__file__)), "inmobilis.db"))
         return connection
 
@@ -63,7 +62,6 @@ class DB:
 
     def insert_listing(self, listing:dict):
         # TODO: Read query from config, throwing error when importing Util for some reason
-        # query = "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (%Title%, %Link%, %Raw_Link%, %Price%, %Address%, %Raw_Details%, 0, 0, 0, %Property_Type%, %Neighborhood%, %Operation_Type%, 0)"
         query = "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
         print(query)
