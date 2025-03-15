@@ -30,7 +30,7 @@ class DB:
     def get_price_alert_number(self):
         query = "SELECT price_alert FROM settings"
         exec = self.connection.cursor().execute(query)
-        return exec.fetchone()
+        return float(exec.fetchone()[0])
     
     def get_urls_to_scrape(self):
         query = "SELECT Url, Neighborhood FROM scrape_urls WHERE Enabled = '1'"
