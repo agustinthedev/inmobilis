@@ -1,4 +1,4 @@
-import os, json
+import os, json, re
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,3 +24,22 @@ class Util():
     
     def get_telegram_chat_id(self):
         return os.getenv("telegram_chat_id")
+    
+    def format_details(self, raw_details:str, title:str):
+        details = {}
+        
+        bedrooms = re.findall("(\d+)\s+(?=dormitorio)", raw_details)
+        details['bedrooms'] = str(bedrooms[0]) if len(bedrooms) > 0 else "0"
+
+        bathrooms = re.findall("(\d+)\s+(?=baño)", raw_details)
+        details['bathrooms'] = str(bathrooms[0]) if len(bathrooms) > 0 else "0"
+
+        area = re.findall("(\d+)\s+(?=m² cubiertos)", raw_details)
+        details['area'] = str(area[0]) if len(area) > 0 else "0"
+
+        if "monoambiente" in title.lower() or "mono ambiente" in title.lower():
+            print(f"[!] Monoambiente detected, changing bedrooms amount to 0.")
+            details['bedrooms'] = "0"
+
+        return details
+
