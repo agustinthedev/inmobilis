@@ -44,7 +44,7 @@ class DB:
         return exec.fetchall()
     
     def get_scrape_results_listings(self, scrape_id):
-        query = f""
+        query = f"" #TODO: Implement
     
     def listing_with_url_exists(self, url):
         # TODO: Check if listing is in (current_scrape_id - 1) before returning
