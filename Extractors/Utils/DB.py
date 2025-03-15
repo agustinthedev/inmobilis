@@ -45,6 +45,11 @@ class DB:
     
     def get_scrape_results_listings(self, scrape_id):
         query = f"" #TODO: Implement
+
+    def get_median_price(self, scrape_id:str, operation:str, neighborhood:str, bedrooms:str, exclude_types:str):
+        query = f'SELECT MAX(Price) AS "Median" FROM (SELECT Price, NTILE(4) OVER(ORDER BY Price) AS Quartile FROM listings WHERE Scrape_Id = "{scrape_id}" AND Operation_Type = "{operation}" AND Bedrooms = "{bedrooms}" AND Neighborhood = "{neighborhood}" AND Property_Type NOT IN ("{exclude_types}")) X WHERE Quartile = 2'
+        exec = self.connection.cursor().execute(query)
+        return exec.fetchone()
     
     def listing_with_url_exists(self, url):
         # TODO: Check if listing is in (current_scrape_id - 1) before returning
