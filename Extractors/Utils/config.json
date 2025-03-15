@@ -1,6 +1,7 @@
 {
     "endpoints": {
-        "deepseek-api": "https://api.deepseek.com"
+        "deepseek-api": "https://api.deepseek.com",
+        "dolar-price": "https://uy.dolarapi.com/v1/cotizaciones/usd"
     },
     "database": {
         "name": "inmobilis.db",
