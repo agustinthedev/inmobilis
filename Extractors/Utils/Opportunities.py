@@ -25,7 +25,7 @@ class Opportunities:
 
         if ((median_rent/dolar_price)*100)/price >= roi_alert or price <= price_alert:
             if not DB().opportunity_sent_exists(url=listing[2]):
-                print("[!] Opportunity detected.")
+                print(f"[!] Opportunity detected: {str(listing[0])}")
                 DB().insert_opportunity_sent(url=listing[2])
 
                 #TODO: Send Telegram message
