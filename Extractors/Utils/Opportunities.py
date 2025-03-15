@@ -27,3 +27,5 @@ class Opportunities:
             if not DB().opportunity_sent_exists(url=listing[2]):
                 print("[!] Opportunity detected.")
                 DB().insert_opportunity_sent(url=listing[2])
+
+                #TODO: Send Telegram message
