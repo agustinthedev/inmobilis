@@ -8,7 +8,7 @@ class Util():
         self.config = self.get_config()
 
     def get_config(self):
-        return json.load(open("config.json"))
+        return json.load(open(os.getenv("config_file_path")))
     
     def get_db_name(self):
         return self.config["database"]["name"]
