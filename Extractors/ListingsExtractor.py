@@ -9,6 +9,7 @@ from Utils.Util import Util
 # TODO: Define list of all types of properties wanted for scrape (apartamentos, casa, cochera, etc) and get URLs
 # TODO: Define list of all neighborhoods and get slugs
 # TODO: Create process to get all URLs needed for scrape by mixing types of properties and neighborhoods
+# TODO: Check currency type and convert before inserting
 
 #url = 'https://listado.mercadolibre.com.uy/inmuebles/apartamentos/alquiler/montevideo/aguada/_Desde_%index%_NoIndex_True'
 results = []
