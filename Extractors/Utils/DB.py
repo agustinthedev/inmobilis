@@ -26,7 +26,7 @@ class DB:
     def get_roi_alert_number(self):
         query = "SELECT roi_alert FROM settings"
         exec = self.connection.cursor().execute(query)
-        return exec.fetchone()
+        return float(exec.fetchone()[0])
     
     def get_price_alert_number(self):
         query = "SELECT price_alert FROM settings"
