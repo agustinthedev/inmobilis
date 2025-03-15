@@ -21,7 +21,7 @@ class DB:
         self.connection.commit()
         scrape_id = exec.lastrowid
 
-        return scrape_id
+        return str(scrape_id)
     
     def get_roi_alert_number(self):
         query = "SELECT roi_alert FROM settings"
