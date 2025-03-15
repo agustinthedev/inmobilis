@@ -18,3 +18,6 @@ class Util():
 
     def get_deepseek_api_key(self):
         return os.getenv("deepseek-API")
+    
+    def get_telegram_bot_token(self):
+        return os.getenv("telegram_bot_token")
