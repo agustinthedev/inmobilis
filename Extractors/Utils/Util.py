@@ -1,4 +1,4 @@
-import os, json, re
+import os, json, re, requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,6 +24,10 @@ class Util():
     
     def get_telegram_chat_id(self):
         return os.getenv("telegram_chat_id")
+    
+    def get_dolar_price(self):
+        req = requests.get(self.get_config()['endpoints']['dolar-price'])
+        return req.json()['venta']
     
     def format_details(self, raw_details:str, title:str):
         details = {}
