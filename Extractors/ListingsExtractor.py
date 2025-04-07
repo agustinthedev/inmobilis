@@ -98,9 +98,7 @@ def start_scraping(url, neighborhood, scrape_id):
                     "scrape_id": str(scrape_id)
                 }
 
-                database.insert_listing(result)
-
-                results.append(result)
+                results.append(database.insert_listing(result))
         else:
             print("[!] No more listing available. Stopping scrapping.")
             break
@@ -119,4 +117,4 @@ if __name__ == "__main__":
     print(f"[!] Final count of results: {str(len(results))}.")
     #TODO: Implement final results amoutn checker to detect big changes in amount of records scraped.
 
-    Opportunities(scrape_id=str(str(args.scrapeid))).process_results()
+    Opportunities(scrape_id=str(args.scrapeid), listings=results).process_results()
