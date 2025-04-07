@@ -2,6 +2,7 @@ import requests, argparse, sys
 from lxml.html import fromstring
 from Utils.DB import DB
 from Utils.Util import Util
+from Utils.Opportunities import Opportunities
 
 #https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230284_NoIndex_True - NUEVO
 #https://listado.mercadolibre.com.uy/inmuebles/venta/montevideo/_ITEM*CONDITION_2230581_NoIndex_True - USADO
@@ -117,3 +118,5 @@ if __name__ == "__main__":
 
     print(f"[!] Final count of results: {str(len(results))}.")
     #TODO: Implement final results amoutn checker to detect big changes in amount of records scraped.
+
+    Opportunities(scrape_id=str(str(args.scrapeid))).process_results()
