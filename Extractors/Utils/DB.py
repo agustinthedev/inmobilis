@@ -84,8 +84,6 @@ class DB:
         query = f'SELECT MAX(Price) AS "Median" FROM (SELECT Price, NTILE(4) OVER(ORDER BY Price) AS Quartile FROM listings WHERE Scrape_Id = "{scrape_id}" AND Operation_Type = "{operation}" AND Bedrooms = "{bedrooms}" AND Neighborhood = "{neighborhood}" AND Property_Type NOT IN ("{exclude_types}")) X WHERE Quartile = 2'
         exec = self.connection.cursor().execute(query)
         median_price = exec.fetchone()[0]
-        print(f"Query: {query}")
-        print(f"Median price: {median_price}")
 
         self.connection.close()
         return median_price
