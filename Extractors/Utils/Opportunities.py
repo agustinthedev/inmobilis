@@ -31,14 +31,14 @@ class Opportunities:
                 price_alert = self.db.get_price_alert_number()
                 dolar_price = Util().get_dolar_price()
 
-                calculated_roi = ((median_rent/dolar_price)*100)/price
+                calculated_roi = (((median_rent/dolar_price)*12)*100)/price if median_rent else None
+                print(f"[!] {str(individual_listing)} - Calculated ROI: {str(calculated_roi)} || Price: {str(price)}")
 
-                if calculated_roi >= roi_alert:
-                    if not DB().opportunity_sent_exists(url=listing[2]):
-                        #TODO: Send Telegram message
-                        notification_text = f"[!] ROI Alert\n\nCalculated ROI: {str(calculated_roi)}\nPrice: {str(price)}\nLink: {listing[2]}"
-                        self.telegram.send_alert(url=listing[2], text=notification_text)
+                if median_rent and calculated_roi >= roi_alert:
+                    #TODO: Send Telegram message
+                    notification_text = f"[!] ROI Alert\n\nCalculated ROI: {str(calculated_roi)}\nPrice: {str(price)}\nLink: {listing[2]}"
+                    self.__send_notification(url=listing[2], text=notification_text)
 
                 elif price <= price_alert:
                     notification_text = f"[!] Price Alert\n\nPrice: {str(price)}\nLink: {listing[2]}"
-                    self.telegram.send_alert(text=notification_text)
+                    self.__send_notification(url=listing[2], text=notification_text)
