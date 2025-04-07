@@ -99,8 +99,10 @@ class DB:
 
         self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], listing['bedrooms'], listing['bathrooms'], listing['area'], listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
         self.connection.commit()
+        listing_id = exec.lastrowid
 
         self.connection.close()
+        return listing_id
 
     def insert_opportunity_sent(self, url:str):
         self.connection = self.start_connection()
