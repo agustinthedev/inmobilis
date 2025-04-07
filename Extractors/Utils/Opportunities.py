@@ -9,6 +9,11 @@ class Opportunities:
         self.db = DB()
         self.telegram = Telegram()
 
+    def __send_notification(self, url:str, text:str):
+        if not DB().opportunity_sent_exists(url=url):
+            DB().insert_opportunity_sent(url=url)
+            self.telegram.send_alert(text=text)
+
     def process_results(self):
         for individual_listing in self.listings_to_process:
             listings = self.db.get_listing_by_row_id(row_id=str(individual_listing), operation_type="Venta")
@@ -26,10 +31,14 @@ class Opportunities:
                 price_alert = self.db.get_price_alert_number()
                 dolar_price = Util().get_dolar_price()
 
-                if ((median_rent/dolar_price)*100)/price >= roi_alert or price <= price_alert:
-                    if not DB().opportunity_sent_exists(url=listing[2]):
-                        print(f"[!] Opportunity detected: {str(listing[0])}")
-                        DB().insert_opportunity_sent(url=listing[2])
+                calculated_roi = ((median_rent/dolar_price)*100)/price
 
+                if calculated_roi >= roi_alert:
+                    if not DB().opportunity_sent_exists(url=listing[2]):
                         #TODO: Send Telegram message
-                        self.telegram.send_alert(url=listing[2])
+                        notification_text = f"[!] ROI Alert\n\nCalculated ROI: {str(calculated_roi)}\nPrice: {str(price)}\nLink: {listing[2]}"
+                        self.telegram.send_alert(url=listing[2], text=notification_text)
+
+                elif price <= price_alert:
+                    notification_text = f"[!] Price Alert\n\nPrice: {str(price)}\nLink: {listing[2]}"
+                    self.telegram.send_alert(text=notification_text)
