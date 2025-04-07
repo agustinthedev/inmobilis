@@ -64,8 +64,6 @@ class DB:
         # TODO: Read query from config, throwing error when importing Util for some reason
         query = "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-        print(query)
-
         self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], listing['bedrooms'], listing['bathrooms'], listing['area'], listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
         self.connection.commit()
 
