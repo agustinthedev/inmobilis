@@ -21,7 +21,7 @@ class Opportunities:
             for listing in listings:
                 price = int(listing[4])
                 median_rent = self.db.get_median_price(
-                    scrape_id=self.scrape_id,
+                    scrape_id=self.scrape_id, # TODO: maybe use scrape_id - 1? now first runs will have partial data to determine ROI. If implemented, first run needs to be without Opportunities module.
                     operation="Alquiler",
                     neighborhood=str(listing[11]),
                     bedrooms=str(listing[7]),
