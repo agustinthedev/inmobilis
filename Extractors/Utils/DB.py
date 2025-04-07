@@ -69,6 +69,15 @@ class DB:
 
         self.connection.close()
         return scrape_results_listings
+    
+    def get_listing_by_row_id(self, row_id:str, operation_type:str):
+        self.connection = self.start_connection()
+        query = f"SELECT * FROM listings WHERE Id='{row_id}' AND Operation_Type='{operation_type}'"
+        exec = self.connection.cursor().execute(query)
+        listing = exec.fetchall()
+
+        self.connection.close()
+        return listing
 
     def get_median_price(self, scrape_id:str, operation:str, neighborhood:str, bedrooms:str, exclude_types:str):
         self.connection = self.start_connection()
@@ -97,7 +106,7 @@ class DB:
         # TODO: Read query from config, throwing error when importing Util for some reason
         query = "INSERT INTO listings (Title, Link, Raw_Link, Price, Address, Raw_Details, Bedrooms, Bathrooms, Area, Property_Type, Neighborhood, Operation_Type, Scrape_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-        self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], listing['bedrooms'], listing['bathrooms'], listing['area'], listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
+        exec = self.connection.cursor().execute(query, (listing['title'], listing['link'], listing['raw_link'], listing['price'], listing['address'], listing['raw_details'], listing['bedrooms'], listing['bathrooms'], listing['area'], listing['property_type'], listing['neighborhood'], listing['operation_type'], listing['scrape_id']))
         self.connection.commit()
         listing_id = exec.lastrowid
 
