@@ -1,4 +1,4 @@
-import subprocess, multiprocessing
+import subprocess
 from Extractors.Utils.DB import DB
 
 db = DB()
